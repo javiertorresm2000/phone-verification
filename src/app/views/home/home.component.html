@@ -58,7 +58,7 @@
                       (keyup)="keyupNumber($event)"
                     >
                   </div>
-                  <small *ngIf="validator">Write a valid number (Ej. 56878945645)</small>
+                  <small *ngIf="validator">Write a valid number, no spaces, no special characters (Ej. 1234567890)</small>
                 </div>
               </div>
             </div>
@@ -68,9 +68,9 @@
             </div>
             <div *ngIf="phoneValidated" class="mt-3 w-100 text-center">
               <hr class="mb-5">
-              <div *ngIf="phoneValidation.valid " class="d-flex align-items-center justify-content-center flex-direction-column">
+              <div *ngIf="phoneValidation.hasOwnProperty('valid') && phoneValidation.valid" class="d-flex align-items-center justify-content-center flex-direction-column">
                 <div class="card px-4 py-2 valid-card text-center">
-                  <h3>The phone number is valid!</h3>
+                  <h3>The phone number is valid</h3>
                   <i class="fas fa-check-circle fa-3x"></i>
                 </div>
                 <div class="mt-4 text-start">
@@ -81,9 +81,15 @@
                   <div><b>Location: </b>{{phoneValidation.location}}</div>
                 </div>
               </div>
-              <div *ngIf="!phoneValidation.valid" class="d-flex align-items-center justify-content-center flex-direction-column">
+              <div *ngIf="phoneValidation.hasOwnProperty('valid') && !phoneValidation.valid" class="d-flex align-items-center justify-content-center flex-direction-column">
                 <div class="card px-4 py-2 invalid-card" >
-                  <h3>The phone number is invalid!</h3>
+                  <h3>The phone number is not valid</h3>
+                  <i class="fas fa-times-circle fa-3x"></i>
+                </div>
+              </div>
+              <div *ngIf="phoneValidation.hasOwnProperty('error')" class="d-flex align-items-center justify-content-center flex-direction-column">
+                <div class="card px-4 py-2 invalid-card" >
+                  <h4>{{phoneValidation.error.info}}</h4>
                   <i class="fas fa-times-circle fa-3x"></i>
                 </div>
               </div>
