@@ -1,0 +1,98 @@
+<div class="wrapper">
+  <div class="container pt-5">
+    <div class="row d-flex align-items-center justify-content-center w-100 mt-5 pt-2">
+      <div class="col-lg-8 col-md-10 col-sm-12">
+          <div class="card p-5 d-flex align-items-center vh-50">
+            <h1><strong>Verify your phone!</strong></h1>
+            <h6>Write your phone number and you'll see if it's a valid number</h6>
+            <hr class="w-100 mb-3">
+            <div class="row w-100">
+              <div class="col-5">
+                <div class="form-group">
+                  <label for="">Country</label>
+                  <div class="dropdown"  >
+                    <button type="button" 
+                      class="btn btn-outline-dropdown w-100 d-flex align-items-center justify-content-between"
+                      (click)="showCountries()"
+                      #countriesDropdownButton
+                    >
+                      <div class="d-flex align-items-center">
+                        <img [src]="selectedCountry.flags.png" alt="" class="country-flag me-2">
+                        <div class="country-name">{{ selectedCountry.name }}</div>
+                      </div>
+                      <div class="ms-2">
+                        <i class="fas fa-chevron-down"></i>
+                      </div>
+                    </button>
+                    <div class="dropdown-menu" #countriesDropdownMenu
+                      [ngClass]="{'show': showCountriesDropdown}" 
+                    >
+                      <div class="dropdown-item">
+                        <input type="text" class="form-control" (keyup)="filterCountries($event)" #filterInput [(ngModel)]="filterValue">
+                      </div>
+                      <div class="countries-container">
+                        <div *ngFor="let country of filteredCountries; let index = index" 
+                          class="dropdown-item d-flex align-items-center p-2"
+                          (click)="selectCountry(index)"
+                        >
+                          <img [src]="country.flags.png" alt="" class="country-flag me-2">
+                          <div class="country-name">{{ country.name }}</div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                      <small *ngIf="validator && selectedCountry.name === 'Select Country'">You need to select a country</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-7">
+                <div class="form-group">
+                  <label for="">Phone Number</label>
+                  <div class="input-group" [ngClass]="{'focus': inputNumberFocused}">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text h-100">{{ selectedCountry.callingCodes === '' ? '' : '+ ' + selectedCountry.callingCodes }}</span>
+                    </div>
+                    <input type="tel" class="form-control" pattern="[0-9]+" [(ngModel)]="phoneNumber" placeholder="Write a number..."
+                      (focus)="focusInputNumber(true)"
+                      (blur)="focusInputNumber(false)"
+                      (keyup)="keyupNumber($event)"
+                    >
+                  </div>
+                  <small *ngIf="validator">Write a valid number (Ej. 56878945645)</small>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="d-flex justify-content-center w-100">
+              <button type="button" class="btn btn-info btn-verify btn-lg" (click)="verify()">Verify!</button>
+            </div>
+            <div *ngIf="phoneValidated" class="mt-3 w-100 text-center">
+              <hr class="mb-5">
+              <div *ngIf="phoneValidation.valid " class="d-flex align-items-center justify-content-center flex-direction-column">
+                <div class="card px-4 py-2 valid-card text-center">
+                  <h3>The phone number is valid!</h3>
+                  <i class="fas fa-check-circle fa-3x"></i>
+                </div>
+                <div class="mt-4 text-start">
+                  <h5>Here you have the details</h5>
+                  <div><b>Country: </b>{{phoneValidation.country_name}}</div>
+                  <div><b>Carrier: </b>{{phoneValidation.carrier}}</div>
+                  <div><b>Line Type: </b>{{phoneValidation.line_type}}</div>
+                  <div><b>Location: </b>{{phoneValidation.location}}</div>
+                </div>
+              </div>
+              <div *ngIf="!phoneValidation.valid" class="d-flex align-items-center justify-content-center flex-direction-column">
+                <div class="card px-4 py-2 invalid-card" >
+                  <h3>The phone number is invalid!</h3>
+                  <i class="fas fa-times-circle fa-3x"></i>
+                </div>
+              </div>
+              <br>
+              <button class="btn btn-warning btn-lg" (click)="reset()">Reset</button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>

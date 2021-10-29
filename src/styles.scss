@@ -1,1 +1,132 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* ===========
+      FONTS     
+   =========== */
+   @font-face {
+    font-family: Raleway;
+    src: url(./assets/fonts/Raleway/Raleway-VariableFont_wght.ttf);
+  }
+  
+  @font-face {
+    font-family: Raleway;
+    font-weight: bold;
+    src: url(./assets/fonts/Raleway/static/Raleway-Bold.ttf);
+  }
+
+  body {
+    font-family: 'Raleway' !important;
+  }
+
+  .btn-lg{
+    font-weight: 700;
+    width: 200px;
+  }
+
+  .btn-verify{
+    color: white;
+    
+    background-color: rgb(45, 171, 255);
+    transition: .3s;
+    border:  rgb(26, 162, 253);
+    &:focus{
+      box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+      background-color: rgb(45, 171, 255);
+      color: white;
+    }
+    &:hover{
+      color: white;
+      background-color: rgb(16, 154, 246);
+      border: 1px solid  rgb(26, 162, 253);;
+    }
+  }
+
+  .input-group{
+    border-radius: 5px;
+    .input-group-text{
+      background-color: white;
+    }
+    .form-control{
+      border-left: 0px;
+      &:focus{
+        box-shadow: none !important;
+        border-color: #ced4da !important;
+      }
+    }
+  }
+
+  .btn{
+    border: 1px solid #ced4da;
+  }
+
+  .focus{
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+  }
+
+  .wrapper{
+    width: 100vw;
+    height: 100vh;
+    background-color: #020323;
+  }
+
+  .dropdown-menu{
+    width: 100%;
+    max-height: 350px;
+    height: 350px;
+    box-shadow: 0px 5px 8px 2px #00000063;
+    .dropdown-item{
+      cursor: pointer;
+      transition: .3s;
+    }
+  }
+
+  .min-vh-50{
+    height: 50vh;
+  }
+
+  .row{
+    margin: 0;
+    width: 100%;
+  }
+
+  .countries-container{
+    height: 290px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .dropdown-toggle::after{
+    display: none !important;
+  }
+
+  .country-name{
+    white-space:initial
+  }
+
+  .country-flag{
+    width: 35px;
+  }
+
+  .valid-card{
+    border-radius: 15px;
+    border: 2px solid #0e9820;
+    box-shadow: 0px 0px 5px 5px #0e9820a1;
+    i{
+      color: #0e9820;
+    }
+  }
+
+  .invalid-card{
+    border-radius: 15px;
+    border: 2px solid rgb(190, 39, 39);
+    box-shadow: 0px 0px 5px 5px rgba(233, 42, 42, 0.644);
+    i{
+      color:rgb(190, 39, 39);
+    }
+  }
+
+  .flex-direction-column{
+    flex-direction: column;
+  }
